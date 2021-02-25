@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("config.php")
 ?>
 <!DOCTYPE html>
@@ -13,7 +14,15 @@ include("config.php")
 </head>
 
 <body>
-    <h3 class="text-primary">Affichage Article</h3>
+    <?php 
+    
+    if(isset($_SESSION["email"])){
+        if($_SESSION["role"]!="Admin")
+        {
+            echo 'you are not allowed';
+        }
+        else{
+    ?>
     <div class="container">
         <div class="row">
             <?php
@@ -35,7 +44,15 @@ include("config.php")
         
 <?php } ?>      
         </div>
-    </div>
+            </div><?php  }} else{
+
+
+
+                header("Location:login.php");
+             } 
+            
+            
+            ?>
 </body>
 
 </html>

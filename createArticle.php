@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include("config.php");
 
 if(isset($_POST["nom_article"])){
@@ -25,6 +26,15 @@ if(isset($_POST["nom_article"])){
     <title>Créer Article</title>
 </head>
 <body>
+<?php 
+    
+    if(isset($_SESSION["email"])){
+        if($_SESSION["role"]!="Admin")
+        {
+            echo 'you are not allowed';
+        }
+        else{
+    ?>
 <form action="" method="POST" style="width: 30%;margin:auto">
  
  <div class="form-group">
@@ -53,6 +63,14 @@ if(isset($_POST["nom_article"])){
 </div>
 
  <button type="submit" class="btn btn-primary">Ajouter article</button>
-</form>
+</form><?php  }} else{
+
+
+
+header("Location:login.php");
+} 
+
+
+?>
 </body>
 </html>

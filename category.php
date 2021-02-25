@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("config.php");
 if(isset($_GET["nom_catégorie"])){
     $nom=$_GET["nom_catégorie"];
@@ -21,15 +22,16 @@ if(isset($_GET["nom_catégorie"])){
     <title>Catégorie</title>
 </head>
 <body>
-<form action="" style="width: 30%;margin:auto">
- 
-  <div class="form-group">
-    <label for="exampleInputPassword1">Nom catégorie</label>
-    <input type="text" name="nom_catégorie" class="form-control" id="exampleInputPassword1">
-  </div>
+<?php 
+    
+    if(isset($_SESSION["email"])){
+        if($_SESSION["role"]!="Admin")
+        {
+            echo 'you are not allowed';
+        }
+        else{
+    ?>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -51,6 +53,23 @@ if(isset($_GET["nom_catégorie"])){
     </tr>
       <?php } ?>
   </tbody>
-</table>
+</table><br>
+<form action="" style="width: 30%;margin:auto">
+ 
+  <div class="form-group">
+    <label for="exampleInputPassword1">Nom catégorie</label>
+    <input type="text" name="nom_catégorie" class="form-control" id="exampleInputPassword1">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form><?php  }} else{
+
+
+
+header("Location:login.php");
+} 
+
+
+?>
 </body>
 </html>
